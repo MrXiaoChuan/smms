@@ -1,0 +1,143 @@
+/* 公共样式 */
+a{
+    color:#fff;
+    text-decoration: none;
+}
+html,
+body,
+#home,
+#app,
+#login{
+  height: 100%;
+  margin: 0;
+}
+.el-aside{
+    min-height:100%;
+}
+/* -----------------左边侧栏 ------------------ */
+/* 左边背景 */
+.el-aside {
+  background: url('../images/leftBG.png') repeat-y;
+  color: #333;
+  text-align: right;
+}
+
+/* 左边栏标题 */
+#leftTitle {
+    margin-right: 24px;
+    color: #d1d0cf;
+  }
+  #leftTitle p {
+    font-size: 14px;
+    color: #d1d0cf;
+  }
+  #leftTitle p a {
+    color: #d1d0cf;
+    padding: 0 4px;
+    text-decoration: none;
+  }
+  
+
+/* 菜单栏背景 */
+.el-menu{
+    background: transparent ;
+}
+
+/* 菜单列表 */
+.el-submenu__title{
+    height:33px;
+    line-height:33px;
+    width:205px;
+    /* background:linear-gradient(rgb(38, 233, 207),rgb(216, 57, 221)); */
+    background: url('../images/leftMenu.png') repeat-x;
+    margin-left:24px;
+    margin-bottom:10px;
+    border-radius: 4px 0 0 4px;
+    color:#fff;
+}
+.el-submenu.is-opened .el-submenu__title{
+    background: #fff;
+    color:#333;
+    font-weight:bold;
+}
+
+/* 子菜单 */
+.el-submenu .el-menu-item{
+    height:30px;
+    line-height:30px;
+    width:205px;
+    border-radius: 4px 0 0 4px;
+    background: transparent ;
+    margin-left:24px;
+    margin-bottom:5px;
+    padding: 0 24px ;
+    color:#fff ;
+}
+.el-menu-item:hover,.el-menu-item:focus,.el-menu-item.is-active{
+    background: rgba(255, 255, 255, 0.5) ;
+    /* color:rgb(241, 184, 26) ; */
+    font-size:15px;
+}
+
+body > .el-container {
+  margin-bottom: 40px;
+}
+
+.el-container:nth-child(5) .el-aside,
+.el-container:nth-child(6) .el-aside {
+  line-height: 260px;
+}
+
+.el-container:nth-child(7) .el-aside {
+  line-height: 320px;
+}
+.el-submenu__icon-arrow{
+    display:none;
+}
+/* -----------------右边侧栏 ------------------ */
+/* -----------头部 ---------- */
+.el-header,
+.el-footer {
+  background-color: #fafafa;
+  color: #333;
+  text-align: left;
+}
+.rheader h1{
+    font-size:24px;
+    margin-top:40px;
+    margin-bottom:0px;
+}
+.rheader p{
+    margin-bottom:20px;
+}
+/* -----------尾部 ---------- */
+.el-footer p{
+    border-top:1px solid #ccc;
+    font-size:12px;
+    padding:19px 0;
+}
+/* -----------内容------------- */
+.el-main {
+    background-color: #fafafa;
+    color: #333;
+    height:76%;
+    overflow-y: scroll;
+}
+.el-main h3{
+    margin:0px;
+}
+.el-main .el-card__header{
+    background: linear-gradient(#fff,#e6e6e6);
+}
+.el-main .el-alert{
+    margin-bottom:15px;
+}
+
+/* 勒 */
+#mainContent {
+    display: flex;
+    flex-wrap: wrap;
+}
+#mainContent > * {
+width: 100%;
+}
