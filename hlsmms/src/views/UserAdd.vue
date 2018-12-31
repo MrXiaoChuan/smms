@@ -21,8 +21,8 @@
               label-width="100px"
               class="demo-ruleForm"
             >
-              <el-form-item label="账号" prop="account">
-                <el-input type="text" v-model="ruleForm.account" autocomplete="off"></el-input>
+              <el-form-item label="账号" prop="username">
+                <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
               </el-form-item>
               <el-form-item label="密码" prop="pass">
                 <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
@@ -30,10 +30,10 @@
               <el-form-item label="确认密码" prop="checkPass">
                 <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
               </el-form-item>
-              <el-form-item label="活动区域" prop="region">
-                <el-select v-model="ruleForm.region" placeholder="选择用户组">
-                  <el-option label="普通用户" value="shanghai"></el-option>
-                  <el-option label="超级用户" value="beijing"></el-option>
+              <el-form-item label="活动区域" prop="usergroup">
+                <el-select v-model="ruleForm.usergroup" placeholder="选择用户组">
+                  <el-option label="普通用户" value="SuperUser"></el-option>
+                  <el-option label="超级用户" value="OrdinaryUsers"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item>
@@ -69,13 +69,13 @@ export default {
     return {
       ruleForm: {
         pass: "",
-        account: "",
-        region: '',
+        username: "",
+        usergroup: ""
       },
       rules2: {
-        account: [
+        username: [
           { required: true, message: "请输入账号", trigger: "blur" },
-          { min: 4, max: 14, message: "长度在 4 到 14 个字符", trigger: "blur" }
+          { max: 10, message: "长度在 10 以内的字符", trigger: "blur" }
         ],
         pass: [
           { required: true, message: "请输入密码", trigger: "blur" },
@@ -85,9 +85,9 @@ export default {
           { required: true, message: "请输入密码", trigger: "blur" },
           { validator: validatePass2, trigger: "blur" }
         ],
-        region: [
-            { required: true, message: '请选择活动区域', trigger: 'change' }
-          ],
+        usergroup: [
+          { required: true, message: "请选择活动区域", trigger: "change" }
+        ]
       }
     };
   },
@@ -95,7 +95,28 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
+          this.axios
+            .post(
+              "http://127.0.0.1:9090/users/useradd",
+              this.qs.stringify(this.ruleForm)
+            )
+            .then(result => {
+              console.log("服务器成功返回结果", result);
+              if (result.data.isOk) {
+                this.$message({
+                  message: result.data.msg,
+                  type: "success"
+                });
+                setTimeout(() => {
+                  this.$router.push("/userlist");
+                }, 100);
+              } else {
+                this.$message.error(result.data.msg);
+              }
+            })
+            .catch(err => {
+              console.error("服务器错误返回的信息", err);
+            });
         } else {
           console.log("error submit!!");
           return false;
@@ -115,10 +136,10 @@ export default {
 </script>
 
 <style>
-.el-input{
-  width:40%;
+.el-input {
+  width: 40%;
 }
-.el-input--suffix{
-  width:100%;
+.el-input--suffix {
+  width: 100%;
 }
 </style>
