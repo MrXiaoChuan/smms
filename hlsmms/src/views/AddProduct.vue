@@ -34,15 +34,15 @@
               <el-form-item label="商品名称：" prop="tradename">
                 <el-input v-model="ruleForm.tradename" style="width:500px;"></el-input>
               </el-form-item>
+              <el-form-item label="商品进价：">
+                <el-input @blur="pcsaleprice" v-model="ruleForm.pcsaleprice" style="width:200px;"></el-input>&nbsp;元
+              </el-form-item>
               <el-form-item label="商品售价：" prop="price">
                 <el-input v-model="ruleForm.price" style="width:200px;"></el-input>&nbsp;元
               </el-form-item>
               <el-form-item label="市场价：">
                 <el-input v-model="ruleForm.marketvalue" style="width:200px;"></el-input>&nbsp;元
                 <p class="ps">默认市场价为售价的1.2倍</p>
-              </el-form-item>
-              <el-form-item label="商品进价：">
-                <el-input v-model="ruleForm.pcsaleprice" style="width:200px;"></el-input>&nbsp;元
               </el-form-item>
               <el-form-item label="入库数量：">
                 <el-input v-model="ruleForm.stockpurchase" style="width:200px;"></el-input>
@@ -64,7 +64,7 @@
               </el-form-item>
               <el-form-item label="商品介绍：" style="width:800px;">
                 <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="textarea"></el-input>
-              <p class="ps">不超过200个汉字</p>
+                <p class="ps">不超过200个汉字</p>
               </el-form-item>
 
               <el-form-item>
@@ -101,15 +101,14 @@ export default {
         stockpurchase: "",
         weight: "",
         company: "",
-        textarea: '',
+        textarea: ""
       },
       rules: {
         region: [
           { required: true, message: "请选择活动区域", trigger: "change" }
         ],
         upc: [
-          { required: true, message: "请输入商品条形码", trigger: "blur" },
-          { min: 13, max: 13, message: "长度在 13  个字符", trigger: "blur" }
+          { required: true, message: "请输入商品条形码", trigger: "change" }
         ],
         tradename: [
           { required: true, message: "请输入商品名称", trigger: "blur" }
@@ -139,6 +138,13 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    onSubmit(){
+      this.ruleForm.upc = new Date().getTime();
+    },
+    pcsaleprice(){
+      this.ruleForm.price = this.ruleForm.pcsaleprice*5;
+      this.ruleForm.marketvalue = this.ruleForm.price*1.2; 
     }
   }
 };
@@ -149,9 +155,9 @@ export default {
   margin: 0px;
   font-size: 12px;
   color: #7c7c7c;
-  font-weight:lighter;
+  font-weight: lighter;
 }
-.el-form-item{
-  font-weight:bold;
+.el-form-item {
+  font-weight: bold;
 }
 </style>

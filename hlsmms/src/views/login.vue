@@ -16,8 +16,8 @@
           <el-form-item label="账号" prop="username">
             <el-input type="text" v-model="ruleForm2.username" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="pass">
-            <el-input type="password" v-model="ruleForm2.pass" autocomplete="off"></el-input>
+          <el-form-item label="密码" prop="userpwd">
+            <el-input type="password" v-model="ruleForm2.userpwd" autocomplete="off"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submitForm('ruleForm2')">登陆</el-button>
@@ -44,11 +44,11 @@ export default {
     };
     return {
       ruleForm2: {
-        pass: "",
+        userpwd: "",
         username: ""
       },
       rules2: {
-        pass: [
+        userpwd: [
           { required: true, message: "请输入密码", trigger: "blur" },
           { min: 3, max: 8, message: "长度在 3 到 8 个字符", trigger: "blur" }
         ],
@@ -63,7 +63,24 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$router.push('/');
+          // 允许axios携带cookie证书
+          this.axios.defaults.withCredentials=true;
+          // 
+          this.axios.post('http://localhost:9090/users/checklogin',this.qs.stringify(this.ruleForm2))
+          .then(result=>{
+            console.log("验证的结果"+result);
+            if(result.data.isOk){
+              this.$message({
+                message:'恭喜你，'+result.data.msg,
+                type:'success',
+              });
+              this.$router.push('/');
+            }else{
+              this.$message.error(result.data.msg);
+            }
+          }).catch(err=>{
+            this.$message.error("错了"+err.message);
+          });
         } else {
           console.log("登陆失败");
           return false;

@@ -5,7 +5,7 @@
         <p>您好,admin</p>
         <p>
           <a href="#">管理首页</a>|
-          <a href="#">退出系统</a>
+          <a href="#" @click="loginout()">退出系统</a>
         </p>
       </div>
       <el-menu
@@ -88,6 +88,22 @@ export default {
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
+    },
+    loginout(){
+      this.axios.get("http://localhost:9090/users/loginout")
+      .then(result=>{
+        if(result.data.isOk){
+          this.$message({
+            message:"退出成功！欢迎下次登陆!",
+            type:'success',
+          });
+          this.$router.push('/login');
+        }else{
+          this.$message.error("退出失败");
+        }
+      }).catch(err=>{
+        console.log(err);
+      })
     }
   }
     

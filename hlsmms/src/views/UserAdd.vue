@@ -32,8 +32,8 @@
               </el-form-item>
               <el-form-item label="活动区域" prop="usergroup">
                 <el-select v-model="ruleForm.usergroup" placeholder="选择用户组">
-                  <el-option label="普通用户" value="SuperUser"></el-option>
-                  <el-option label="超级用户" value="OrdinaryUsers"></el-option>
+                  <el-option label="普通用户" value="普通用户"></el-option>
+                  <el-option label="超级用户" value="超级用户"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item>
@@ -101,7 +101,6 @@ export default {
               this.qs.stringify(this.ruleForm)
             )
             .then(result => {
-              console.log("服务器成功返回结果", result);
               if (result.data.isOk) {
                 this.$message({
                   message: result.data.msg,

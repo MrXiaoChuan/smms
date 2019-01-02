@@ -15,6 +15,22 @@ import qs from 'qs';
 // 挂载到原型上
 Vue.prototype.qs = qs;
 
+// 构造全局守卫
+router.beforeEach((to,from,next)=>{
+  // let islogin = false;
+  axios.defaults.withCredentials=true;
+  axios.get('http://localhost:9090/users/getcookie')
+  .then(result=>{
+    if(result.data.isOk || to.path=="/login"){
+      next();
+    }else{
+      next("/login");
+    }
+  }).catch(err=>{
+    console.error("错误："+err.message);
+  })
+})
+
 Vue.config.productionTip = false
 
 new Vue({
