@@ -66,7 +66,7 @@ export default {
           // 允许axios携带cookie证书
           this.axios.defaults.withCredentials=true;
           // 
-          this.axios.post('http://localhost:9090/users/checklogin',this.qs.stringify(this.ruleForm2))
+          this.axios.post('http://172.16.4.199:9090/users/checklogin',this.qs.stringify(this.ruleForm2))
           .then(result=>{
             console.log("验证的结果"+result);
             if(result.data.isOk){

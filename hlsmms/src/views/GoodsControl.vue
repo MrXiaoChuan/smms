@@ -37,7 +37,7 @@
               <el-table-column prop="totalsales" label="销售总额(元)" min-width="100"></el-table-column>
               <el-table-column fixed="right" label="管理" width="145">
                 <template slot-scope="scope">
-                  <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                  <el-button size="mini" @click="handleEdit(scope.index,scope.row)">编辑</el-button>
                   <el-button
                     size="mini"
                     type="danger"

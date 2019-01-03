@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-
 // 引入mysql
 const mysql = require('mysql');
 const conn = mysql.createConnection({
@@ -19,7 +18,7 @@ conn.connect((err)=>{
 })
 
 router.all('*',(req,res,next)=>{
-  res.header('Access-Control-Allow-Origin','http://localhost:8080');
+  res.header('Access-Control-Allow-Origin','http://172.16.4.199:8080');
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 })
@@ -140,5 +139,6 @@ router.get("/loginout",(req,res)=>{
   // }
   res.send({"isOk":true});
 });
+
 
 module.exports = router;

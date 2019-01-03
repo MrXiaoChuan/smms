@@ -19,7 +19,7 @@ Vue.prototype.qs = qs;
 router.beforeEach((to,from,next)=>{
   // let islogin = false;
   axios.defaults.withCredentials=true;
-  axios.get('http://localhost:9090/users/getcookie')
+  axios.get('http://172.16.4.199:9090/users/getcookie')
   .then(result=>{
     if(result.data.isOk || to.path=="/login"){
       next();

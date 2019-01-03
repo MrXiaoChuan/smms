@@ -97,7 +97,7 @@ export default {
         if (valid) {
           this.axios
             .post(
-              "http://127.0.0.1:9090/users/useradd",
+              "http://172.16.4.199:9090/users/useradd",
               this.qs.stringify(this.ruleForm)
             )
             .then(result => {

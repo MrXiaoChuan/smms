@@ -90,7 +90,7 @@ export default {
       console.log(key, keyPath);
     },
     loginout(){
-      this.axios.get("http://localhost:9090/users/loginout")
+      this.axios.get("http://172.16.4.199:9090/users/loginout")
       .then(result=>{
         if(result.data.isOk){
           this.$message({

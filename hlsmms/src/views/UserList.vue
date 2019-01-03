@@ -156,7 +156,7 @@ export default {
     handleDelete(userid) {
       console.log(userid);
       this.axios
-        .get("http://localhost:9090/users/deluser?userid=" + userid)
+        .get("http://172.16.4.199:9090/users/deluser?userid=" + userid)
         .then(result => {
           console.log(result);
           result = result.data;
